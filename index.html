@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./css/index.css">
+</head>
+<body>
+    <div class="grid grid-cols-6 grid-rows-auto gap-4">
+        <main class="col-span-full bg-white p-3 main" >
+            <header class="mb-3 sticky top-0 z-1000 shadow shadow- teal-200 rounded-lg">
+                <div class="bg-teal-100 rounded-lg p-3 flex justify-between">
+                    <div>
+                        <h1 class="text-xl text-teal-700 md:text-3xl">Financial Overview</h1>
+                        <p class="text-xl text-teal-500 md:text-xl"><strong class="text-teal-700">Welcome Back,</strong> here is what's happening with your Money.</p>
+                    </div>
+                    <div class="flex items-center justify-between p-2">
+                        <span class="mr-2 text-indigo-500">User</span>
+                        <label class="switch mr-2">
+                            <input type="checkbox" id="adminToggle">
+                            <span class="slider"></span>
+                        </label>
+                        <span class="text-amber-600">Admin</span>
+                    </div>
+                
+                </div>
+            </header>
+            
+            <!-- cards -->
+
+            <div class="grid grid-cols-1 m-4 gap-6 md:grid-cols-3">
+                <div class="balance rounded-xl bg-teal-50 p-3 shadow-md shadow-indigo-200 hover:shadow-indigo-300 transition duration-300">
+                    <p class="text-slate-500 font-medium text-sm"><strong>Total Balance</strong></p>
+                    <h2 id="totalBalance" class="mt-2 font-bold text-xl text-indigo-600">&#8377  </h2>
+                    <div class="mt-2 text-xs text-emerald-600 font-semibold">Based on your transactions</div>
+                </div>
+                <div class="income rounded-xl bg-teal-50 p-3 shadow-md shadow-emerald-200 hover:shadow-emerald-300 transition duration-300">
+                    <p class="text-slate-500 font-medium text-sm"><strong>Income</strong></p>
+                    <h2 id="totalIncome" class="font-bold mt-3 text-emerald-600 text-xl">&#8377 58000</h2>
+                    <div class="mt-2 text-xs text-slate-400 font-normal">Primary Salary + Freelance</div>
+                </div>
+                <div class="expenses rounded-xl bg-teal-50 p-3 shadow-md shadow-rose-200 hover:shadow-rose-300 transition duration-300">
+                    <p class="text-slate-500 font-medium text-sm"><strong>Expenses</strong></p>
+                    <h2 id="totalExpenses" class="text-rose-500 font-bold mt-3 text-xl">&#8377 35000</h2>
+                    <div id="remainingBalance" class="mt-2 text-xs text-rose-400 font-normal">Remaining: &#8377 23000</div>
+                </div>
+            </div>
+
+
+            <!-- analytic section -->
+            <section id="analysis">
+                <div class="analytics grid grid-cols-1 mt-4 pt-4 gap-7">
+                    <div class="analytic-header p-4 bg-teal-100 rounded-xl">
+                        <span class="analytic opacity-25 ">Analytics</span>
+                        <span class="analytic-sht text-teal-700">Analytics</span>
+                    </div>
+
+                    <div class="flex justify-evenly flex-col md:flex-row gap-6">
+
+                        <!-- Balance Trends  using chart.js -->
+                        <div class="p-3 bg-teal-50 rounded-xl time-chart">
+                            <h3 class="font-semibold m-4">Balance Trends (Last 7 Days)</h3>
+                            <div class="chart-container mt-4 pt-4 p-4 "><canvas id="time-chart"></canvas></div>
+                        </div>
+
+                        <!-- Expence Breakdown using chart.js -->
+                        <div class="pie-chart p-3 bg-teal-50 rounded-xl">
+                            <h3 class="font-semibold m-4">Spending by Catagory</h3>
+                            <div class="Catagory-container mt-4 pt-4 p-4 max-w[250px] mx-auto"> <canvas id="pie-chart"></canvas></div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+            
+            <!-- transaction section -->
+            <section id="transaction">
+                <div class="p-1 mt-5 bg-teal-50 rounded-xl">
+                     <div class="analytic-header p-4 bg-teal-100 rounded-xl">
+                        <span class="analytic opacity-25">Transactions</span>
+                        <span class="analytic-sht text-teal-700">Transactions</span>
+                    </div>
+                    
+                    <div class="p-4 mt-3">
+                        <div class="flex gap-2 mb-4">
+                            <input class="border rounded-lg p-2 text-sm focus:outline-indigo-200" type="text" name="" id="searchInput" placeholder="Search Transaction...">
+                            <select name="" id="filterCategory" class="border border-slate-200 rounded-lg p-2 text-sm">
+                                <option value="All"> All Transaction</option>
+                                <option value="Housing">Housing</option>
+                                <option value="Food">Food</option>
+                                <option value="Travel">Travel</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Transport"> Transport</option>
+                                <option value="Salary">Salary</option>
+                                <option value="Freelance">Freelance</option>
+                                <option value="Bonus">Bonus</option>
+                                <option value="Other">Other</option>
+                                <option value="Income">Income</option>
+
+                            </select>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="w-full  text-left text-sm">
+                                <thead class="bg-slate-100 text-slate-500 uppercase">
+                                    <tr>
+                                        <th class="px-4 py-3 font-bold">Date</th>
+                                        <th>Description</th>
+                                        <th>Catagory</th>
+                                        <th>Amount</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="transactionBody" class=" divide-y divide-state-100"></tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div>
+
+            </section>
+
+            <!-- admin section for add or edit transaction -->
+            <section id="adminSection" class="hidden">
+                <div class=" mt-3 p-3 grid grid-cols-1 md:grid-cols-2">
+                    <div class="col-span-full">
+                        <div class="analytic-header p-4 bg-teal-100 rounded-xl">
+                            <span class="analytic opacity-25 ">Add Income Or Expenses</span>
+                            <span class="analytic-sht text-teal-700">Add Income Or Expenses</span>
+                        </div>
+                            
+                        <p class="text-slate-500 font-bold text-md mt-3 p-3">Enter the details of your Transaction</p>
+                    </div>
+
+                 <!-- adding expenses form -->
+                    <div id="incomePanel" class="bg-teal-50 rounded-lg p-3 m-4 shadow-md shadow-rose-200 hover:shadow-rose-300 transition">
+                        <h4 class="text-slate-600 font-semibold px-3 pt-3">Add Expense</h4>
+                        <form action="" id="expenseForm" class="space-y-4 p-3 m-3">
+                           
+                            <div class="grid grid-cols-2 gap-2">
+                                <div >
+                                    <label for="" class="block text-xs font-semibold text-slate-500 mn-1"> Description</label>
+                                    <input type="text" id="expenseDescription" placeholder="e.g netflix sebscription"
+                                    class=" border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none">
+                                </div>
+                                <div>
+                                    <label for="" class="block text-xs font-semibold text-slate-500 mn-1"> Date</label>
+                                    <input type="date" id="expenseDate" placeholder=""
+                                    class=" border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none required">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label for="" class="block text-xs font-semibold uppercase text-slate-500 mn-1">Amount</label>
+                                    <input type="number" id="expenseAmount" placeholder="10000" required 
+                                    class="w-full border  border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none">
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Category</label>
+                                    <select id="expenseCategory" class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-teal-500 outline-none">
+                                        <option value="Food">Food</option>
+                                        <option value="Housing">Housing</option>
+                                        <option value="Grocery">Grocery</option>
+                                        <option value="Transport">Transport</option>
+                                        <option value="Entertainment"> Entertainment</option>
+                                        <option value="Travel">Travel</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button id="addExpense" type="submit" class="w-full bg-teal-100 text-teal-700 font-bold py-3 rounded-lg hover:bg-teal-200 transition mt-4">
+                                    Add Expense
+                            </button>
+                        </form>
+                    </div>
+
+                 <!-- adding income form -->
+                    <div class="bg-teal-50 rounded-lg p-3 m-4 shadow-md shadow-emerald-200 hover:shadow-emerald-300 transition">
+                        <h4 class="text-slate-600 font-semibold px-3 pt-3">Add Income</h4>
+                        
+                        <form action="" id="incomeForm" class="space-y-4 p-3 m-3">
+                           
+                            <div class="grid grid-cols-2 gap-2">
+                                <div >
+                                    <label for="" class="block text-xs font-semibold text-slate-500 mn-1"> Description</label>
+                                    <input type="text" id="incomeDescription" placeholder="Freelance"
+                                    class=" border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none">
+                                </div>
+                                <div>
+                                    <label for="" class="block text-xs font-semibold text-slate-500 mn-1"> Date</label>
+                                    <input type="date" id="incomeDate" placeholder=""
+                                    class=" border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none required">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-2 gap-2">
+                                <div>
+                                    <label for="" class="block text-xs font-semibold uppercase text-slate-500 mn-1">Amount</label>
+                                    <input type="number" id="incomeAmount" placeholder="10000" required 
+                                    class="w-full border  border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none">
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-semibold uppercase text-slate-500 mb-1">Category</label>
+                                    <select id="incomeCategory" class="w-full border border-slate-200 rounded-lg px-4 py-2 focus:ring-2 focus:ring-teal-500 outline-none">
+                                        <option value="Salary">Salary</option>
+                                        <option value="Freelance">Freelance</option>
+                                        <option value="Bonus">Bonus</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button id="addIncome" type="submit" class="w-full bg-teal-100 text-teal-700 font-bold py-3 rounded-lg hover:bg-teal-200 transition mt-4">
+                                    Add Income
+                            </button>
+                        </form>
+                    </div>
+
+                </div>
+            </section>
+
+
+            <!-- insight section -->
+            <section>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 p-3">
+                    <div class="bg-indigo-50 border border-indigo-100 p-6 rounded-xl shadow-md shadow-indigo-200 hover:shadow-indigo-300 transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <h4 class="font-bold text-indigo-900">Top Expense</h4>
+                        </div>
+                        <p id="topCategoryText" class="text-2xl font-bold text-indigo-700">Loading...</p>
+                        <p class="text-sm text-indigo-500 mt-1">This is your biggest "money pit" this month.</p>
+                    </div>
+
+                    <div class="bg-emerald-50 border border-emerald-100 p-6 rounded-xl shadow-md shadow-emerald-200 hover:shadow-emerald-300 transition">
+                        <div class="flex items-center gap-3 mb-2">
+                            <h4 class="font-bold text-emerald-900">Monthly Budget</h4>
+                        </div>
+                        <p id="budgetStatus" class="text-2xl font-bold text-emerald-700">Under Budget</p>
+                        <p id="budgetText" class="text-sm text-emerald-500 mt-1">Keep it up!</p>
+                    </div>
+
+                    <div class="bg-amber-50 border border-amber-100 p-6 rounded-xl shadow-md shadow-amber-200 hover:shadow-amber-300 transition">
+                        <a href="./pages/insights.html"><div class="flex items-center gap-3 mb-2">
+                            <h4 class="font-bold text-amber-900">Smart Observation</h4>
+                        </div>
+                        <p id="observationText" class="text-sm font-medium text-amber-800 leading-relaxed italic">
+                            Searching for patterns...
+                        </p>
+                    </div></a>
+                </div>
+                
+            </section>
+
+
+
+
+        </main>
+    </div>
+    <script src="./javascript/index.js"></script>
+</body>
+</html>
