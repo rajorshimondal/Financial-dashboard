@@ -10,21 +10,21 @@
     <link rel="stylesheet" href="./css/index.css">
 </head>
 <body>
-    <div class="grid grid-cols-6 grid-rows-auto gap-4">
+    <div class="grid grid-cols-6 grid-rows-auto gap-5 p-5">
         <main class="col-span-full bg-white p-3 main" >
-            <header class="mb-3 sticky top-0 z-1000 shadow shadow- teal-200 rounded-lg">
+            <header class="mb-3 sticky top-0 z-1000 shadow shadow- teal-200 rounded-xl">
                 <div class="bg-teal-100 rounded-lg p-3 flex justify-between">
                     <div>
                         <h1 class="text-xl text-teal-700 md:text-3xl">Financial Overview</h1>
-                        <p class="text-xl text-teal-500 md:text-xl"><strong class="text-teal-700">Welcome Back,</strong> here is what's happening with your Money.</p>
+                        <p class="text-xs text-teal-500 md:text-lg"><strong class="text-teal-700">Welcome Back,</strong> here is what's happening with your Money.</p>
                     </div>
-                    <div class="flex items-center justify-between p-2">
-                        <span class="mr-2 text-indigo-500">User</span>
+                    <div class="flex items-center justify-between p-2 ">
+                        <span class="mr-2 text-indigo-500 text-sm ">User</span>
                         <label class="switch mr-2">
                             <input type="checkbox" id="adminToggle">
                             <span class="slider"></span>
                         </label>
-                        <span class="text-amber-600">Admin</span>
+                        <span class="text-amber-600 text-sm">Admin</span>
                     </div>
                 
                 </div>
@@ -62,13 +62,13 @@
                     <div class="flex justify-evenly flex-col md:flex-row gap-6">
 
                         <!-- Balance Trends  using chart.js -->
-                        <div class="p-3 bg-teal-50 rounded-xl time-chart">
+                        <div class="p-3 bg-teal-50 rounded-xl time-chart shadow-md shadow-indigo-200 hover:shadow-indigo-300 transition">
                             <h3 class="font-semibold m-4">Balance Trends (Last 7 Days)</h3>
                             <div class="chart-container mt-4 pt-4 p-4 "><canvas id="time-chart"></canvas></div>
                         </div>
 
                         <!-- Expence Breakdown using chart.js -->
-                        <div class="pie-chart p-3 bg-teal-50 rounded-xl">
+                        <div class="pie-chart p-3 bg-teal-50 rounded-xl shadow-md shadow-rose-200 hover:shadow-rose-300 transition">
                             <h3 class="font-semibold m-4">Spending by Catagory</h3>
                             <div class="Catagory-container mt-4 pt-4 p-4 max-w[250px] mx-auto"> <canvas id="pie-chart"></canvas></div>
 
@@ -81,7 +81,7 @@
             
             <!-- transaction section -->
             <section id="transaction">
-                <div class="p-1 mt-5 bg-teal-50 rounded-xl">
+                <div class="p-1 pt-4 mt-5 bg-teal-50 rounded-xl">
                      <div class="analytic-header p-4 bg-teal-100 rounded-xl">
                         <span class="analytic opacity-25">Transactions</span>
                         <span class="analytic-sht text-teal-700">Transactions</span>
@@ -129,8 +129,8 @@
                 <div class=" mt-3 p-3 grid grid-cols-1 md:grid-cols-2">
                     <div class="col-span-full">
                         <div class="analytic-header p-4 bg-teal-100 rounded-xl">
-                            <span class="analytic opacity-25 ">Add Income Or Expenses</span>
-                            <span class="analytic-sht text-teal-700">Add Income Or Expenses</span>
+                            <span class="analytic opacity-25 ">Transactions Form</span>
+                            <span class="analytic-sht text-teal-700">Transactions Form</span>
                         </div>
                             
                         <p class="text-slate-500 font-bold text-md mt-3 p-3">Enter the details of your Transaction</p>
@@ -141,11 +141,11 @@
                         <h4 class="text-slate-600 font-semibold px-3 pt-3">Add Expense</h4>
                         <form action="" id="expenseForm" class="space-y-4 p-3 m-3">
                            
-                            <div class="grid grid-cols-2 md:cols-span-1 gap-2">
+                            <div class="grid grid-cols-2 gap-2">
                                 <div >
-                                    <label for="" class="block text-xs font-semibold text-slate-500 mn-1 "> Description</label>
-                                    <input type="text" id="expenseDescription" placeholder="e.g netflix sebscription"
-                                    class=" border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none">
+                                    <label for="" class="block text-xs font-semibold text-slate-500 mn-1"> Description</label>
+                                    <input type="text" id="expenseDescription" placeholder="e.g sebscription"
+                                    class="w-full border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none">
                                 </div>
                                 <div>
                                     <label for="" class="block text-xs font-semibold text-slate-500 mn-1"> Date</label>
@@ -189,12 +189,12 @@
                                 <div >
                                     <label for="" class="block text-xs font-semibold text-slate-500 mn-1"> Description</label>
                                     <input type="text" id="incomeDescription" placeholder="Freelance"
-                                    class=" border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none">
+                                    class="w-full border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none">
                                 </div>
                                 <div>
                                     <label for="" class="block text-xs font-semibold text-slate-500 mn-1"> Date</label>
                                     <input type="date" id="incomeDate" placeholder=""
-                                    class=" border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none required">
+                                    class="w-full border border-slate-200 rounded-lg p-2 focus:ring-2 focus:ring-teal-500 outline-none required">
                                 </div>
                             </div>
 
