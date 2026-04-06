@@ -14,7 +14,7 @@ body {
 }
 .analytic{
     position: absolute;
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 800;
     color: transparent;
     -webkit-text-stroke: 1px #737373;
@@ -46,7 +46,7 @@ body {
 /* From Uiverse.io by gharsh11032000 */ 
 /* The switch - the box around the slider */
 .switch {
-  font-size: 10px;
+  font-size: 8px;
   position: relative;
   display: inline-block;
   width: 3.5em;
