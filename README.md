@@ -4,7 +4,7 @@ A comprehensive financial overview dashboard built with HTML, CSS, and JavaScrip
 
 ## 🚀 Related Projects
 
-**React Version**: A modern React implementation of this financial dashboard with enhanced features and better scalability. [Repository Link](https://github.com/your-username/financial-dashboard-react) *(Coming Soon)*
+**React Version**: A modern React implementation of this financial dashboard with enhanced features and better scalability. This is the git repository of the react version, the file structure may not be organised, since my gitbash have some tech issue, i ahve to upload the file separately. (https://github.com/rajorshimondal/finance_dash_react.git)
 
 ## Features
 
